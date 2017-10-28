@@ -1,0 +1,85 @@
+
+
+/***** General style, all sections *****/
+
+.section-container { margin: 0 auto; padding-bottom: 80px; }
+
+
+
+.section-container-image-bg .divider-1 .line { border-color: #fff; opacity: 0.8; }
+
+.section-description { margin-top: 60px; padding-bottom: 10px; }
+
+.section-description p { margin-top: 20px; padding: 0 120px; }
+.section-container-image-bg .section-description p { opacity: 0.8; }
+
+
+/***** Divider *****/
+
+.divider-1 { padding: 25px 0 15px 0; }
+.divider-1 .line { width: 200px; margin: 0 auto; border-bottom: 1px solid #ddd; }
+
+
+/***** Testimonials *****/
+
+.testimonials-container { padding-bottom: 70px; }
+
+.testimonial-list { text-align: center; }
+
+.testimonial-list .testimonial-image img {
+  border-radius: 50%;
+  max-width: 160px;
+}
+
+.testimonial-list .testimonial-text { margin-top: 30px; }
+.testimonial-list .testimonial-text p { color: #fff;font-size: 13px; }
+
+.testimonial-auther > p {
+  color: #fff;
+  font-size: 25px;
+  margin: 20px 0 10px;
+}
+.testimonial-list .testimonial-text a { color: #fff; border-bottom: 1px dotted #fff; }
+.testimonial-list .testimonial-text a:hover, 
+.testimonial-list .testimonial-text a:focus { color: #fff; border: 0; }
+
+.testimonial-list .nav-tabs { margin-top: 30px; border: 0; }
+.testimonial-list .nav-tabs li {
+  display: inline-block;
+  float: none;
+  margin: 0 3px;
+}
+
+.testimonial-list .nav-tabs li a {
+    width: 12px; 
+	height: 12px; 
+	margin: 0; 
+	padding: 0;
+    -moz-border-radius: 50%; 
+	-webkit-border-radius: 50%; 
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.3) none repeat scroll 0 0 !important;
+	border: none !important; 
+}
+
+.testimonial-list .nav-tabs li.active a,
+.testimonial-list .nav-tabs li.active a:hover,
+.testimonial-list .nav-tabs li.active a:focus { background: #fff !important;}
+
+
+
+
+/******** Custom Changes *******/
+.testimonials-container{
+  background: #000 none repeat scroll 0 0;
+}
+
+/***** MEDIA QUERIES *****/
+
+@media (min-width: 768px) and (max-width: 991px) {
+	.section-description p { padding: 0; }
+}
+
+@media (max-width: 767px) {
+	.section-description p { padding: 0; }
+}
