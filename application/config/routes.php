@@ -65,3 +65,6 @@ $route['product-for-sale-detail'] = 'home/product_for_sale_detail';
 $route['car-booking'] = 'home/car_booking';
 $route['car-search'] = 'home/car_search';
 $route['car-search-result'] = 'home/car_search_result';
+$route['terms-and-condition'] = 'home/terms_and_condition';
+$route['privacy-policy'] = 'home/privacy_policy';
+$route['faq'] = 'home/faq';

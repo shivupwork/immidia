@@ -2,311 +2,228 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-
-
-
-
-
-
 class Home extends CI_Controller {
 
+    /**
 
+     * Index Page for this controller.
 
-	/**
+     *
 
-	 * Index Page for this controller.
+     * Maps to the following URL
 
-	 *
+     * 		http://example.com/index.php/welcome
 
-	 * Maps to the following URL
+     * 	- or -
 
-	 * 		http://example.com/index.php/welcome
+     * 		http://example.com/index.php/welcome/index
 
-	 *	- or -
+     * 	- or -
 
-	 * 		http://example.com/index.php/welcome/index
+     * Since this controller is set as the default controller in
 
-	 *	- or -
+     * config/routes.php, it's displayed at http://example.com/
 
-	 * Since this controller is set as the default controller in
+     *
 
-	 * config/routes.php, it's displayed at http://example.com/
+     * So any other public methods not prefixed with an underscore will
 
-	 *
+     * map to /index.php/welcome/<method_name>
 
-	 * So any other public methods not prefixed with an underscore will
+     * @see https://codeigniter.com/user_guide/general/urls.html
 
-	 * map to /index.php/welcome/<method_name>
+     */
+    public $yachtCountry;
+    public $yachtState;
+    public $daysArrayInit;
+    public $yachtList;
+    public $yachtDetails;
+    public $IMAGE_URL;
 
-	 * @see https://codeigniter.com/user_guide/general/urls.html
+    function __construct() {
 
-	 */
+        parent::__construct();
 
-		public $yachtCountry;
+        $this->getYachtCountry();
 
-		public $yachtState;
+        $this->daysArrayInit = array(
+            array('id' => 1, 'name' => 'Half Day (9am - 1pm)', 'Half Day (9am - 1pm)' => 1),
+            array('id' => 2, 'name' => 'Half Day (2pm - 6pm)', 'Half Day (2pm - 6pm)' => 2),
+            array('id' => 3, 'name' => '24 Hour (Noon - Noon)', '24 Hour (Noon - Noon)' => 3),
+            array('id' => 4, 'name' => '1 Day (09:00 - 19:00 Hrs)', '1 Day (09:00 - 19:00 Hrs)' => 4),
+            array('id' => 5, 'name' => 'More (----)', 'More (----)' => 5),
+            array('id' => 6, 'name' => '1 Week (----)', '1 Week (----)' => 6),
+            array('id' => 7, 'name' => '2 Week (----)', '2 Week (----)' => 7),
+            array('id' => 8, 'name' => '3 Week (----)', '3 Week (----)' => 8),
+            array('id' => 9, 'name' => '4 Week (----)', '4 Week (----)' => 9)
+        );
 
-		public $daysArrayInit;
+        $this->IMAGE_URL = $this->config->item('IMAGE_URL');
+    }
 
-		public $yachtList;
-		public $yachtDetails;
-		public $IMAGE_URL;
+    function getYachtCountry() {
 
+        $this->load->library('PHPRequests');
 
+        $request_made = $this->config->item('API_URL') . 'action=get_yachtcountry_list';
 
+        $response = json_decode(Requests::get($request_made)->body);
 
+        if ($response->status == true) {
 
+            $this->yachtCountry = $response->data;
+        } else {
 
+            $this->yachtCountry = null;
+        }
+    }
 
-	  function __construct() {
+    public function getYachtState($countryId) {
 
-	  	parent::__construct();
+        $this->load->library('PHPRequests');
 
-	  	$this->getYachtCountry();
+        $request_made = $this->config->item('API_URL') . 'action=get_yachtstate_list&countryId=' . $countryId;
 
-	  	$this->daysArrayInit =  array(
+        $response = json_decode(Requests::get($request_made)->body);
 
-               array('id' => 1 , 'name' => 'Half Day (9am - 1pm)' ,'Half Day (9am - 1pm)' =>1), 
+        if ($response->status == true) {
 
-               array('id' => 2 , 'name' => 'Half Day (2pm - 6pm)','Half Day (2pm - 6pm)'=>2), 
+            echo json_encode($response->data);
+        } else {
 
-               array('id' => 3 , 'name' => '24 Hour (Noon - Noon)','24 Hour (Noon - Noon)'=>3), 
+            echo "";
+        }
+    }
 
-               array('id' => 4 , 'name' => '1 Day (09:00 - 19:00 Hrs)','1 Day (09:00 - 19:00 Hrs)' => 4), 
+    public function getYachtDepartureCity($country, $state, $days, $daysId, $yachtType, $routeType) {
 
-               array('id' => 5 , 'name' => 'More (----)','More (----)'=> 5), 
+        $this->load->library('PHPRequests');
 
-               array('id' => 6 , 'name' => '1 Week (----)','1 Week (----)'=>6), 
+        $request_made = $this->config->item('API_URL') . 'action=get_yachtdeparture_list&countryId=' . $country . '&stateId=' . $state . '&days=' . $days . '&daysId=' . $daysId . '&yachtType=' . $yachtType . '&routeType=' . $routeType;
 
-               array('id' => 7 , 'name' => '2 Week (----)','2 Week (----)'=>7), 
+        $response = json_decode(Requests::get($request_made)->body);
 
-               array('id' => 8 , 'name' => '3 Week (----)','3 Week (----)'=>8), 
+        if ($response->status == true) {
 
-               array('id' => 9 , 'name' => '4 Week (----)','4 Week (----)'=>9)
+            echo json_encode($response->data);
+        } else {
 
-                );  
+            echo "";
+        }
+    }
 
-	  	$this->IMAGE_URL = $this->config->item('IMAGE_URL');
-      }
+    public function getYachtArrivalCity($country, $state, $days, $daysId, $departureCity, $yachtType, $routeType) {
 
 
 
-      function getYachtCountry(){
+        $this->load->library('PHPRequests');
 
-      	$this->load->library('PHPRequests');
+        $request_made = $this->config->item('API_URL') . 'action=get_yacht_arrival_port&countryId=' . $country . '&stateId=' . $state . '&days=' . $days . '&daysId=' . $daysId . '&departureId=' . $departureCity . '&yachtType=' . $yachtType . '&routeType=' . $routeType;
 
-      	$request_made = $this->config->item('API_URL').'action=get_yachtcountry_list';
+        $response = json_decode(Requests::get($request_made)->body);
 
-   		$response = json_decode(Requests::get($request_made)->body);
+        if ($response->status == true) {
 
-	   		if($response->status == true){
+            echo json_encode($response->data);
+        } else {
 
-	   			$this->yachtCountry = $response->data;
+            echo "";
+        }
+    }
 
-	   		}else{
+    public function yachts() {
 
-	   			$this->yachtCountry = null;
+        $this->load->library('PHPRequests');
 
-	   		}
+        $request_made = $this->config->item('API_URL') . 'action=get_yacht_booking_list&guests=' . $_REQUEST['guest'] . '&stateId=' . $_REQUEST['yachtState'] . '&startCity=' . $_REQUEST['departureCity'] . '&days=1&bookingDate=' . date_format(date_create($_REQUEST['departureDate']), 'y-m-d') . '&yachtType=' . $_REQUEST['yachtType'] . '&routeType=' . $_REQUEST['routeType'] . '&arrivalPort=' . $_REQUEST['arrivalCity'];
 
+        $response = json_decode(Requests::get($request_made)->body);
 
+        if ($response->status == true) {
 
-      }
+            $this->yachtList = json_decode(json_encode($response->data));
 
+            $this->load->view('home/yacht_list');
+        } else {
 
+            echo '<script>alert("No data Found")</script>';
 
+            $this->load->view('home/home');
+        }
+    }
 
+    public function index() {
 
-	public function getYachtState($countryId){
 
-		$this->load->library('PHPRequests');
 
-      	$request_made = $this->config->item('API_URL').'action=get_yachtstate_list&countryId='.$countryId;
+        $this->load->view('home/home');
+    }
 
-   		$response = json_decode(Requests::get($request_made)->body);
+    public function yachts_details($yachtId) {
+        $this->load->library('PHPRequests');
+        $request_made = $this->config->item('API_URL') . 'action=get_yacht_details&yachtId=' . $yachtId;
+        $response = json_decode(Requests::get($request_made)->body);
+        if ($response->status == true) {
+            $this->yachtDetails = json_decode(json_encode($response->data));
+            $this->load->view('home/yacht_details');
+        } else {
 
-	   		if($response->status == true){
+            echo '<script>alert("No data Found")</script>';
 
-	   			echo json_encode($response->data);
+            $this->load->view('home/yacht_list');
+        }
+    }
 
-	   		}else{
+    public function booking() {
 
-	   			echo "";
+        $this->load->view('home/booking');
+    }
 
-	   		}
+    public function chauffeur_services() {
 
-	}
+        $this->load->view('home/chauffeur_service');
+    }
 
+    public function login() {
 
+        $this->load->view('auth/login');
+    }
 
+    public function product_for_sale() {
 
+        $this->load->view('home/product_for_sale');
+    }
 
-public function getYachtDepartureCity($country,$state,$days,$daysId,$yachtType,$routeType){
+    public function product_for_sale_detail() {
 
-		$this->load->library('PHPRequests');
+        $this->load->view('home/product_for_sale_detail');
+    }
 
-      	$request_made = $this->config->item('API_URL').'action=get_yachtdeparture_list&countryId='.$country.'&stateId='.$state.'&days='.$days.'&daysId='.$daysId.'&yachtType='.$yachtType.'&routeType='.$routeType;
+    public function car_booking() {
 
-   		$response = json_decode(Requests::get($request_made)->body);
+        $this->load->view('home/car_booking');
+    }
 
-	   		if($response->status == true){
+    public function car_search() {
 
-	   			echo json_encode($response->data);
+        $this->load->view('home/car_search');
+    }
 
-	   		}else{
+    public function car_search_result() {
 
-	   			echo "";
-
-	   		}	
+        $this->load->view('home/car_search_result');
+    }
+    
+    public function terms_and_condition(){
+        $this->load->view('home/terms_and_condition');
+    }
+    
+    public function privacy_policy(){
+        $this->load->view('home/privacy_policy');
+    }
+    
+    public function faq(){
+        $this->load->view('home/faq');
+    }
 
 }
-
-
-
-public function getYachtArrivalCity($country,$state,$days,$daysId,$departureCity,$yachtType,$routeType){
-
-
-
-		$this->load->library('PHPRequests');
-
-      	$request_made = $this->config->item('API_URL').'action=get_yacht_arrival_port&countryId='.$country.'&stateId='.$state.'&days='.$days.'&daysId='.$daysId.'&departureId='.$departureCity.'&yachtType='.$yachtType.'&routeType='.$routeType;
-
-   		$response = json_decode(Requests::get($request_made)->body);
-
-	   		if($response->status == true){
-
-	   			echo json_encode($response->data);
-
-	   		}else{
-
-	   			echo "";
-
-	   		}	
-
-}
-
-
-
-
-
-	public function yachts() { 
-
-			$this->load->library('PHPRequests');
-
-      	$request_made = $this->config->item('API_URL').'action=get_yacht_booking_list&guests='.$_REQUEST['guest'].'&stateId='.$_REQUEST['yachtState'].'&startCity='.$_REQUEST['departureCity'].'&days=1&bookingDate='.date_format(date_create($_REQUEST['departureDate']),'y-m-d').'&yachtType='.$_REQUEST['yachtType'].'&routeType='.$_REQUEST['routeType'].'&arrivalPort='.$_REQUEST['arrivalCity'];
-
-   		$response = json_decode(Requests::get($request_made)->body);
-
-	   		if($response->status == true){
-
-	   			$this->yachtList =  json_decode(json_encode($response->data));
-
-	   			$this->load->view('home/yacht_list');
-
-	   		}else{
-
-	   			echo '<script>alert("No data Found")</script>';
-
-	   			$this->load->view('home/home');
-
-	   		}	
-
-
-
-
-
-			
-
-	}
-
-
-
-	public function index()
-
-	{
-
-		
-
-		$this->load->view('home/home');
-
-	}
-
-
-
-	public function yachts_details($yachtId){
-
-		$this->load->library('PHPRequests');
-
-      	$request_made = $this->config->item('API_URL').'action=get_yacht_details&yachtId='.$yachtId;
-
-   		$response = json_decode(Requests::get($request_made)->body);
-
-	   		if($response->status == true){
-
-	   			$this->yachtDetails =  json_decode(json_encode($response->data));
-	   			$this->load->view('home/yacht_details');
-	   		}else{
-
-	   			echo '<script>alert("No data Found")</script>';
-
-	   			$this->load->view('home/yacht_list');
-
-	   		}	
-		
-
-	}
-
-        public function booking(){
-
-            $this->load->view('home/booking');
-
-        }
-
-        public function chauffeur_services(){
-
-             $this->load->view('home/chauffeur_service');
-
-        }
-
-        public function login(){
-
-             $this->load->view('auth/login'); 
-
-        }
-
-        public function product_for_sale(){
-
-             $this->load->view('home/product_for_sale');
-
-        }
-
-        public function product_for_sale_detail(){
-
-             $this->load->view('home/product_for_sale_detail');
-
-        }
-
-        public function car_booking(){
-
-            $this->load->view('home/car_booking');
-
-        }
-
-        public function car_search(){
-
-            $this->load->view('home/car_search');
-
-        }
-
-        public function car_search_result(){
-
-            $this->load->view('home/car_search_result');
-
-        }
-
-
-
-
-
-}
-
