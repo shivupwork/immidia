@@ -4,17 +4,13 @@
 		<title>Login/Sign Up</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-       
-
-		<style>
-
-	</style>
-		<script>
+        <?php $this->load->view('header/head'); ?>
+      <script>
           $(document).ready(function(){
             $( ".date-picker" ).datepicker({format: "yyyy/mm/dd" ,todayHighlight: true,autoclose: true,});
             $( ".date-picker" ).datepicker("hide");
          });
-		</script>
+     </script>
 		
 <script type="text/javascript">
             $(function () {
@@ -25,6 +21,8 @@
         </script>
 	</head>
 	
+	<body id="login">
+            
 	<header>
 		<?php $this->load->view('header/header'); ?>
 		
@@ -34,7 +32,6 @@
 			</div>
 		</div>
 	</header>
-	<body id="login">
 	<section>
 		<div class="container">
 			<div class="row">
