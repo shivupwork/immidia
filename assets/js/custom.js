@@ -1,7 +1,7 @@
 
 	
 	//var base_url = 'http://immidia.ae/';
-	var base_url = 'http://localhost/immidia.ae/';
+	var base_url = 'http://localhost/immidia/trunk/';
 
 	function getYachtState(countryId){
 		$('#loader').removeAttr('style');
