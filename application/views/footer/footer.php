@@ -18,9 +18,9 @@
 						<h3 class="title">Quick Links</h3>
 						<div class="left">
 							<ul>
-								<li><a href="#">Privacy</a></li>
-								<li><a href="#">Terms of Use</a></li>
-								<li><a href="#">Assistance</a></li>
+								<li><a href="<?php echo base_url("privacy-policy")?>">Privacy</a></li>
+								<li><a href="<?php echo base_url("terms-and-condition")?>">Terms of Use</a></li>
+								<li><a href="<?php echo base_url("faq")?>">Assistance</a></li>
 							</ul>
 						</div>
 						<div class="right">
