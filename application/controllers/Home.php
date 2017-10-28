@@ -225,5 +225,41 @@ class Home extends CI_Controller {
     public function faq(){
         $this->load->view('home/faq');
     }
+    public function charter_fleet_guide(){
+        $this->load->view('home/charter_fleet_guide');
+    }
+    public function choose_vehicle(){
+        $this->load->view('home/choose_vehicle');
+    }
+    public function contract(){
+        $this->load->view('home/contract');
+    }
+    public function customer_information(){
+        $this->load->view('home/customer_information');
+    }
+    public function dashboard(){
+        $this->load->view('home/dashboard');
+    }
+    public function food_and_drinks(){
+        $this->load->view('home/food_and_drinks'); 
+    }
+    public function limousine_services(){
+         $this->load->view('home/limousine_services'); 
+    }
+    public function payment(){
+         $this->load->view('home/payment'); 
+    }
+    public function search(){
+        $this->load->view('home/search');
+    }
+    public function search_result(){
+       $this->load->view('home/search_result'); 
+    }
+    public function yacht_booking(){
+      $this->load->view('home/yacht_booking');   
+    }
+    public function yacht_booking_info(){
+      $this->load->view('home/yacht_booking_info');   
+    }
 
 }
