@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
        
-		
+		<?php $this->load->view('header/head'); ?>	
 		
 		<script>
          $(function() {
@@ -23,7 +23,9 @@
 
 	</head>
 	
-	<header>
+	
+	<body class="cs">
+            <header>
 		<?php $this->load->view('header/header'); ?>
 		
 		<div class="container-fluid book page-title">
@@ -32,7 +34,6 @@
 			</div>
 		</div>
 	</header>
-	<body class="cs">
 		<div class="container-fluid" id="slide">
 			<div class="row">
 				<div class="col-md-8 slider-section">

@@ -4,7 +4,7 @@
 		<title>Product For Sale</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-      
+      <?php $this->load->view('header/head'); ?>	
 	<script>
           $(document).ready(function(){
             $( ".date-picker" ).datepicker({format: "yyyy/mm/dd" ,todayHighlight: true,autoclose: true,});
@@ -37,7 +37,9 @@
         </script>
 	</head>
 	
-	<header>
+	
+	<body class="product-for-sale">
+            <header>
 		
 		<?php $this->load->view('header/header'); ?>
 		<div class="container-fluid book page-title page-title1">
@@ -46,7 +48,6 @@
 			</div>
 		</div>
 	</header>
-	<body class="product-for-sale">
 	<section class="ride-detail">
 		<div class="container-fluid ">
 				<div class="container searcharea">

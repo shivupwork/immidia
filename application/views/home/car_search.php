@@ -4,10 +4,12 @@
 		<title>Car Search</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		
+	 <?php $this->load->view('header/head'); ?>	
 		
 	</head>
 	
+	
+	<body>
 	<header>
 		<?php $this->load->view('header/header'); ?>
 		
@@ -17,8 +19,6 @@
 			</div>
 		</div>
 	</header>
-	<body>
-	
 	<section class="slider-section">
 	 <div class="h"></div>
 		<div class="container-fluid">

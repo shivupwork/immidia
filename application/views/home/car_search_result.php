@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		
-		
+		 <?php $this->load->view('header/head'); ?>	
 		<script>
          $(function() {
             $( ".date-picker" ).datepicker({ format: "MM d DD", todayHighlight: true,autoclose: true,});
@@ -75,7 +75,10 @@
 		</script>
 	</head>
 	
-	<header>
+	
+	
+	<body>
+            <header>
 		<?php $this->load->view('header/header'); ?>
 				<div class="container-fluid book-tab">
 			<div class="row">
@@ -216,8 +219,6 @@
 			</div>
 		</div>
 	</header>
-	
-	<body>
 		<div class="container">
 			<div class="row">
 				<div class="breadcrumb">
